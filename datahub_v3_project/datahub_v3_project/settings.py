@@ -56,8 +56,6 @@ INSTALLED_APPS = [
     'connection_details_api',
     'db_config_api',
     'role_detail_api',
-    # 'app.autodiscover_tasks()'
-    # 'core',
     ]
 
 MIDDLEWARE = [
@@ -203,17 +201,3 @@ LOGGING = {
         'level': 'INFO',
     },
 }
-
-CELERY_BROKER_URL = "redis://redis:6379"
-CELERY_RESULT_BACKEND = "redis://redis:6379"
-
-CELERY_BEAT_SCHEDULE = {
-    "sample_task": {
-        "task": "core.tasks.sample_task",
-        "schedule": crontab(minute="*/1"),
-    },
-}
-
-CELERY_IMPORTS = [
-    'core.tasks',
-]
