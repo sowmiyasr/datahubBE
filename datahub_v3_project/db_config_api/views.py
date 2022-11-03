@@ -3,7 +3,7 @@ from django.http.response import Http404
 from urllib import response
 from django.shortcuts import render
 from rest_framework import generics
-from datahub_v3_app.models import db_config
+from datahub_v3_app.models import db_conf
 from rest_framework.views import APIView
 from db_config_api.serializers import db_configserializer
 from rest_framework.response import Response
@@ -15,8 +15,8 @@ from rest_framework.permissions import IsAuthenticated
 class db_config_api(APIView):
     def get_object(self, pk):
             try:
-                return db_config.objects.get(pk=pk)
-            except db_config.DoesNotExist:
+                return db_conf.objects.get(pk=pk)
+            except db_conf.DoesNotExist:
                 raise Http404
     def get(self, request, pk=None, format=None):
             if pk:
@@ -25,7 +25,7 @@ class db_config_api(APIView):
                 return Response(serializer.data)
 
             else:
-                data = db_config.objects.all()
+                data = db_conf.objects.all()
                 serializer = db_configserializer(data, many=True)
 
                 return Response(serializer.data)
@@ -48,7 +48,7 @@ class db_config_api(APIView):
         return response
 
     def put(self, request, pk=None, format=None):
-        conn_to_update = db_config.objects.get(pk=pk)
+        conn_to_update = db_conf.objects.get(pk=pk)
         serializer = db_configserializer(instance=conn_to_update,data=request.data, partial=True)
 
         serializer.is_valid(raise_exception=True)
@@ -62,7 +62,7 @@ class db_config_api(APIView):
         return response
 
     def delete(self, request, pk, format=None):
-        todo_to_delete =db_config.objects.get(pk=pk)
+        todo_to_delete =db_conf.objects.get(pk=pk)
 
         todo_to_delete.delete()
 

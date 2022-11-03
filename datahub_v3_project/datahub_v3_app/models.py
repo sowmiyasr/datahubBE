@@ -112,11 +112,11 @@ class pipline_table(models.Model):
      class Meta:
         db_table = 'pipeline'    
 
-class pipline_det(models.Model):
+class pipline_details(models.Model):
     pipeline_detail_name = models.CharField(max_length=100)
     pipeline_dtls_desc = models.CharField(max_length=100,null=True)
-    #pipeline_id=models.ForeignKey(pipline_table, on_delete=models.CASCADE, blank=True, null=True,related_name='pipeline_id')
-    #sql_extract_name = models.ForeignKey(db_sql_table, on_delete=models.CASCADE, blank=True, null=True,related_name='sql_extract_name')
+    pipeline_id=models.ForeignKey(pipline_table, on_delete=models.CASCADE, blank=True, null=True,related_name='pipeline_id')
+    sql_extract_name = models.ForeignKey(db_sql_table, on_delete=models.CASCADE, blank=True, null=True,related_name='sql_extract_name')
     source_table_name= models.CharField(max_length=100)
     target_table_name = models.CharField(max_length=100)    
     start_date = models.DateField(auto_now=True)
@@ -133,7 +133,7 @@ class pipline_det(models.Model):
     pipeline_dtls_parallel_thread_count = models.CharField(max_length=100,null=True)
 
     class Meta:
-        db_table = 'pipline_det'   
+        db_table = 'pipline_details'   
 
 
 class con_details(models.Model):
@@ -156,15 +156,17 @@ class con_details(models.Model):
         db_table = 'con_details' 
 
 
-class db_config(models.Model):
+class db_conf(models.Model):
     config_name = models.CharField(max_length=100)
     desc = models.CharField(max_length=100)
+    source_connection_name= models.CharField(max_length=100)
+    target_connection_name= models.CharField(max_length=100)
     start_date = models.DateField(auto_now=True)
     end_date = models.DateField()
     is_active = models.BooleanField(default=True) 
 
     class Meta:
-        db_table = 'db_config' 
+        db_table = 'db_conf' 
 
 class role_api(models.Model):
 

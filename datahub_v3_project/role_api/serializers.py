@@ -6,4 +6,4 @@ class role_api_serializer(serializers.ModelSerializer):
 
     class Meta:
         model= role_api
-        fields= ['role_name','role_desc','role_start_date','role_end_date','role_status']
+        fields= ['id','role_name','role_desc','role_start_date','role_end_date','role_status']
