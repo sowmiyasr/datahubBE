@@ -176,3 +176,15 @@ class role_api(models.Model):
 
     class Meta:
         db_table = 'role' 
+
+class role_detail_api(models.Model):
+
+    role_name = models.CharField(max_length=100)
+    role_detail_name = models.CharField(max_length=100)
+    role_description = models.CharField(max_length=150)
+    role_handling_pages = models.CharField(max_length=300)
+
+    class Meta:
+        db_table = 'role_detail' 
+
+        

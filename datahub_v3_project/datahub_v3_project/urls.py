@@ -29,7 +29,7 @@ from pipeline_details_api.views import Pipeline_detail
 from connection_details_api.views import detail
 from db_config_api.views import db_config_api
 from role_api.views import role_name_api
-from pipeline_framework.views import demo
+from role_detail_api.views import role_details_api
 
 schema_view = get_schema_view(
    openapi.Info(
@@ -72,5 +72,6 @@ urlpatterns = [
    path('db_config/<int:pk>',db_config_api.as_view()),
    path('role', role_name_api.as_view()),
    path('role/<int:pk>', role_name_api.as_view()),
-   path('pipe_frame/', demo.as_view()),
+   path('role_detail', role_details_api.as_view()),
+   path('role_detail/<int:pk>', role_details_api.as_view()),
    ]

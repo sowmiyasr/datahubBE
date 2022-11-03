@@ -30,3 +30,4 @@ sqlparse==0.4.3
 uritemplate==4.1.1
 urllib3==1.26.12
 wheel==0.37.1
+celery==5.1.2

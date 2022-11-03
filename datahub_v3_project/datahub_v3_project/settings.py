@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from imghdr import tests
 from pathlib import Path
+from celery.schedules import crontab
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -54,7 +55,9 @@ INSTALLED_APPS = [
     'pipeline_details_api',
     'connection_details_api',
     'db_config_api',
-    'pipeline_framework',
+    'role_detail_api',
+    # 'app.autodiscover_tasks()'
+    # 'core',
     ]
 
 MIDDLEWARE = [
@@ -200,3 +203,17 @@ LOGGING = {
         'level': 'INFO',
     },
 }
+
+CELERY_BROKER_URL = "redis://redis:6379"
+CELERY_RESULT_BACKEND = "redis://redis:6379"
+
+CELERY_BEAT_SCHEDULE = {
+    "sample_task": {
+        "task": "core.tasks.sample_task",
+        "schedule": crontab(minute="*/1"),
+    },
+}
+
+CELERY_IMPORTS = [
+    'core.tasks',
+]
