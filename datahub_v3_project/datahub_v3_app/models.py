@@ -136,14 +136,12 @@ class pipline_details(models.Model):
         db_table = 'pipline_details'   
 
 
-class con_details(models.Model):
+class con_detail(models.Model):
 
     connection_id =models.ForeignKey(Conn, on_delete=models.CASCADE, blank=True, null=True,related_name='connection_id')
-    connection_name = models.CharField(max_length=100)
+    # connection_name = models.CharField(max_length=100)
     connection_detail = models.CharField(max_length=100)
-    conn_pd_id=models.ForeignKey(Conn, on_delete=models.CASCADE, blank=True, null=True,related_name='conn_pd_id')
-    key_pram =models.CharField(max_length=200,null=True)
-    value_pram =models.CharField(max_length=200,null=True)
+    con_str=JSONField()
     start_date = models.DateField(auto_now=True)
     end_date = models.DateField()
     last_modified_by = models.CharField(max_length=100,null=True)
@@ -153,7 +151,7 @@ class con_details(models.Model):
     is_active = models.BooleanField(default=True)
 
     class Meta:
-        db_table = 'con_details' 
+        db_table = 'con_detail' 
 
 
 class db_conf(models.Model):
