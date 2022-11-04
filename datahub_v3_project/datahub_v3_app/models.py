@@ -186,5 +186,14 @@ class role_detail_api(models.Model):
 
     class Meta:
         db_table = 'role_detail' 
+        
+class users_role_view(models.Model):
+    user_name=models.CharField(max_length=300)
+    role_name=models.CharField(max_length=300)
+    start_date=models.DateField(auto_now=True)
+    end_date=models.DateField(auto_now=True)
+    is_active=models.BooleanField(default=True)
 
+    class Meta:
+        db_table = 'user_role' 
         
