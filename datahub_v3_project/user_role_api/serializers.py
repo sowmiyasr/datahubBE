@@ -5,4 +5,4 @@ class users_role_viewserializer(serializers.ModelSerializer):
 
     class Meta:
         model= users_role_view
-        fields= ['user_name','role_name','start_date','end_date','is_active']
+        fields= ['id','user_name','role_name','start_date','end_date','is_active']

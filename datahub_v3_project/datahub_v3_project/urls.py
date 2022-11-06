@@ -32,6 +32,8 @@ from role_api.views import role_name_api
 from role_detail_api.views import role_details_api
 from profile_api.views import profile
 from user_role_api.views import user_role
+from user_api.views import user_profile
+
 schema_view = get_schema_view(
    openapi.Info(
       title="Datahub",
@@ -76,5 +78,6 @@ urlpatterns = [
    path('role_detail', role_details_api.as_view()),
    path('role_detail/<int:pk>', role_details_api.as_view()),
    path('profile/',profile.as_view()),
-   path('user_role/',user_role.as_view())
+   path('user_role/',user_role.as_view()),
+   path('user_api',user_profile.as_view()),
    ]

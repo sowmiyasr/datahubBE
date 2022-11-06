@@ -37,7 +37,7 @@ class User(AbstractBaseUser):
         db_table = "register"
 
 
-class Conn(models.Model):
+class conn(models.Model):
     # connections_id=models.AutoField(auto_created=True,primary_key=True,serialize=True,verbose_name='ID')
     connection_name = models.CharField(max_length=100)
     description = models.CharField(max_length=200)
@@ -48,7 +48,7 @@ class Conn(models.Model):
     key_param=JSONField()
 
     class Meta:
-        db_table = "connections"
+        db_table = "conn"
 
 
 class pipiline_sch(models.Model):
@@ -138,7 +138,7 @@ class pipline_details(models.Model):
 
 class con_detail(models.Model):
 
-    connection_id =models.ForeignKey(Conn, on_delete=models.CASCADE, blank=True, null=True,related_name='connection_id')
+    connection_id =models.ForeignKey(conn, on_delete=models.CASCADE, blank=True, null=True,related_name='connection_id')
     # connection_name = models.CharField(max_length=100)
     connection_detail = models.CharField(max_length=100)
     con_str=JSONField()
