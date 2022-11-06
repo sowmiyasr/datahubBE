@@ -58,6 +58,7 @@ INSTALLED_APPS = [
     'role_detail_api',
     'profile_api',
     'user_role_api',
+    'user_api',
     ]
 
 MIDDLEWARE = [
