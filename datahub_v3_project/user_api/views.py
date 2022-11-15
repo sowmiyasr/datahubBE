@@ -1,6 +1,5 @@
 from dataclasses import fields
 from rest_framework import serializers
-from datahub_v3_app.models import users_role_view
 from django.shortcuts import render
 from rest_framework.views import APIView
 from django.http.response import Http404

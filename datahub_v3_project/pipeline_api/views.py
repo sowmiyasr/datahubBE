@@ -3,7 +3,7 @@ from django.http.response import Http404
 from urllib import response
 from django.shortcuts import render
 from rest_framework import generics
-from datahub_v3_app.models import pipline_table
+from datahub_v3_app.models import pipline_api
 from rest_framework.views import APIView
 from pipeline_api.serializers import pipline_Serializer
 from rest_framework.response import Response
@@ -12,7 +12,7 @@ from rest_framework import status
 class pipeline(APIView):
     def get_user_by_pk(self, pk):
         try:
-            return pipline_table.objects.get(pk=pk)
+            return pipline_api.objects.get(pk=pk)
         except:
             return Response({
                 'error': 'does not exist'
@@ -26,7 +26,7 @@ class pipeline(APIView):
                 return Response([serializer.data])
 
         else:
-                reg = pipline_table.objects.all()
+                reg = pipline_api.objects.all()
                 serializer = pipline_Serializer(reg, many=True)
                 return Response(serializer.data)
 
@@ -48,7 +48,7 @@ class pipeline(APIView):
         return response
 
     def put(self, request, pk=None, format=None):
-        conn_to_update = pipline_table.objects.get(pk=pk)
+        conn_to_update = pipline_api.objects.get(pk=pk)
         serializer = pipline_Serializer(instance=conn_to_update,data=request.data, partial=True)
 
         serializer.is_valid(raise_exception=True)
@@ -64,7 +64,7 @@ class pipeline(APIView):
 
         return response
     def delete(self, request, pk, format=None):
-        todo_to_delete =  pipline_table.objects.get(pk=pk)
+        todo_to_delete =  pipline_api.objects.get(pk=pk)
 
         todo_to_delete.delete()
 

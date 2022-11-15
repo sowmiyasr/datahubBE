@@ -100,9 +100,10 @@ class ScheduleDependency(models.Model):
     class Meta:
         db_table = 'scheduledependency'    
 
-class pipline_table(models.Model):
+class pipline_api(models.Model):
    # Pipeline_name = models.CharField(max_length=100)
      pipeline_name= models.CharField(max_length=30, blank=True)
+     email = models.EmailField(max_length=254)
      Description = models.CharField(max_length=30, blank=True)
      configuration_name = models.CharField(max_length=30,blank=True)
      Start_date = models.DateField()
@@ -110,12 +111,12 @@ class pipline_table(models.Model):
      is_active = models.BooleanField(default=True) 
 
      class Meta:
-        db_table = 'pipeline'    
+        db_table = 'pipeline_api'    
 
 class pipline_details(models.Model):
     pipeline_detail_name = models.CharField(max_length=100)
     pipeline_dtls_desc = models.CharField(max_length=100,null=True)
-    pipeline_id=models.ForeignKey(pipline_table, on_delete=models.CASCADE, blank=True, null=True,related_name='pipeline_id')
+    pipeline_id=models.ForeignKey(pipline_api, on_delete=models.CASCADE, blank=True, null=True,related_name='pipeline_id')
     sql_extract_name = models.ForeignKey(db_sql_table, on_delete=models.CASCADE, blank=True, null=True,related_name='sql_extract_name')
     source_table_name= models.CharField(max_length=100)
     target_table_name = models.CharField(max_length=100)    
@@ -168,7 +169,7 @@ class db_conf(models.Model):
 
 class role_api(models.Model):
 
-    role_name = models.CharField(max_length=100)
+    role_name = models.CharField(max_length=100,unique=True)
     role_desc = models.CharField(max_length=100)
     role_start_date = models.DateField()
     role_end_date = models.DateField()
@@ -177,23 +178,43 @@ class role_api(models.Model):
     class Meta:
         db_table = 'role' 
 
-class role_detail_api(models.Model):
+class role_details_api(models.Model):
 
     role_name = models.CharField(max_length=100)
     role_detail_name = models.CharField(max_length=100)
     role_description = models.CharField(max_length=150)
-    role_handling_pages = models.CharField(max_length=300)
+    role_handling_pages = models.JSONField()
+    read = models.BooleanField(default=True)
+    write = models.BooleanField(default=False)
 
     class Meta:
-        db_table = 'role_detail' 
+        db_table = 'role_details' 
         
-class users_role_view(models.Model):
+class user_role_view(models.Model):
     user_name=models.CharField(max_length=300)
-    role_name=models.CharField(max_length=300)
+    role_name=JSONField()
     start_date=models.DateField(auto_now=True)
     end_date=models.DateField(auto_now=True)
     is_active=models.BooleanField(default=True)
 
     class Meta:
-        db_table = 'user_role' 
-        
+        db_table = 'users_role' 
+
+class schedule_log(models.Model):
+    sche_id = models.IntegerField()
+    start_time = models.TimeField()
+    status = models.CharField(max_length=40)
+
+class pages(models.Model):
+    page_name=models.CharField(max_length=300)
+    module_name=models.CharField(max_length=300,null=True)
+    page_url=models.URLField(max_length=200)
+    start_date=models.DateField(auto_now=True)
+    end_date=models.DateField(auto_now=True)
+    is_active=models.BooleanField(default=True)
+    created_by=models.CharField(max_length=300,null=True)
+    created_on=models.CharField(max_length=300,null=True)
+
+    class Meta:
+        db_table = 'pages' 
+    

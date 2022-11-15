@@ -29,10 +29,13 @@ from pipeline_details_api.views import Pipeline_detail
 from connection_details_api.views import detail
 from db_config_api.views import db_config_api
 from role_api.views import role_name_api
-from role_detail_api.views import role_details_api
+from role_detail_api.views import role_details
 from profile_api.views import profile
 from user_role_api.views import user_role
 from user_api.views import user_profile
+from pipeline_framework.views import pipe_framework
+from page_api.views import page_cl
+from count_api.views import count_api
 
 schema_view = get_schema_view(
    openapi.Info(
@@ -75,9 +78,13 @@ urlpatterns = [
    path('db_config/<int:pk>',db_config_api.as_view()),
    path('role', role_name_api.as_view()),
    path('role/<int:pk>', role_name_api.as_view()),
-   path('role_detail', role_details_api.as_view()),
-   path('role_detail/<int:pk>', role_details_api.as_view()),
+   path('role_detail', role_details.as_view()),
+   path('role_detail/<int:pk>', role_details.as_view()),
    path('profile/',profile.as_view()),
    path('user_role/',user_role.as_view()),
-   path('user_api',user_profile.as_view()),
+   path('user_api/',user_profile.as_view()),
+   path('framework/',pipe_framework.as_view()),
+   path('pages/',page_cl.as_view()),
+   path('pages/<int:pk>',page_cl.as_view()),
+   path('count/',count_api.as_view()),
    ]
