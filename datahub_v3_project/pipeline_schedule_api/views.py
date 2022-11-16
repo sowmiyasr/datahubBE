@@ -4,7 +4,7 @@ from django.http.response import Http404
 from urllib import response
 from django.shortcuts import render
 from rest_framework import generics
-from datahub_v3_app.models import pipiline_sch
+from datahub_v3_app.models import pipeline_schedule
 from rest_framework.views import APIView
 from pipeline_schedule_api.serializers import pipelind_scheduleserializer
 from rest_framework.response import Response
@@ -13,8 +13,8 @@ from rest_framework.response import Response
 class pipeline_sch(APIView):
     def get_object(self, pk):
             try:
-                return pipiline_sch.objects.get(pk=pk)
-            except pipiline_sch.DoesNotExist:
+                return pipeline_schedule.objects.get(pk=pk)
+            except pipeline_schedule.DoesNotExist:
                 raise Http404
     def get(self, request, pk=None, format=None):
             if pk:
@@ -23,7 +23,7 @@ class pipeline_sch(APIView):
                 return Response([serializer.data])
 
             else:
-                data = pipiline_sch.objects.all()
+                data = pipeline_schedule.objects.all()
                 serializer = pipelind_scheduleserializer(data, many=True)
 
                 return Response(serializer.data)
@@ -46,7 +46,7 @@ class pipeline_sch(APIView):
         return response
 
     def put(self, request, pk=None, format=None):
-        conn_to_update = pipiline_sch.objects.get(pk=pk)
+        conn_to_update = pipeline_schedule.objects.get(pk=pk)
         serializer = pipelind_scheduleserializer(instance=conn_to_update,data=request.data, partial=True)
 
         serializer.is_valid(raise_exception=True)
@@ -62,7 +62,7 @@ class pipeline_sch(APIView):
         return response
 
     def delete(self, request, pk, format=None):
-        conect_to_delete =  pipiline_sch.objects.get(pk=pk)
+        conect_to_delete =  pipeline_schedule.objects.get(pk=pk)
 
         conect_to_delete.delete()
 

@@ -24,7 +24,7 @@ from connection_api.views import ListConnectionsAPIView,CreateConnectionsAPIView
 from schedule_dependency.views import schedule_dep
 from db_sql_extract.views import db_sql_extract
 from pipeline_schedule_api.views import pipeline_sch
-from pipeline_api.views import pipeline
+from pipeline_api.views import pipe
 from pipeline_details_api.views import Pipeline_detail
 from connection_details_api.views import detail
 from db_config_api.views import db_config_api
@@ -68,8 +68,8 @@ urlpatterns = [
    path('sql_extract_api/<str:pk>', db_sql_extract.as_view()),
    path('pipe_sc/',pipeline_sch.as_view()),
    path('pipe_sc/<int:pk>',pipeline_sch.as_view()),
-   path('pipeline/', pipeline.as_view()),
-   path('pipeline/<str:pk>', pipeline.as_view()),
+   path('pipeline/', pipe.as_view()),
+   path('pipeline/<str:pk>', pipe.as_view()),
    path('pipeline_det/', Pipeline_detail.as_view()),
    path('pipeline_det/<str:pk>',Pipeline_detail.as_view()),
    path('connection_det/',detail.as_view()),

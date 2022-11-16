@@ -8,7 +8,7 @@ from rest_framework.generics import ListAPIView
 from rest_framework.generics import CreateAPIView
 from rest_framework.generics import DestroyAPIView
 from rest_framework.generics import UpdateAPIView
-from datahub_v3_app.models import conn
+from datahub_v3_app.models import connection
 from rest_framework.views import APIView
 from rest_framework import status
 from connection_api.serializers import ConnectionsSerializer
@@ -19,7 +19,7 @@ from rest_framework import permissions ,filters
 
 
 class ListConnectionsAPIView(ListAPIView):
-    queryset = conn.objects.all()
+    queryset = connection.objects.all()
     serializer_class = ConnectionsSerializer
     # permission_classes = (IsAuthenticated)
 
@@ -30,7 +30,7 @@ class ListConnectionsAPIView(ListAPIView):
     ordering_fields = ['id', 'connection_name']
     def get_user_by_pk(self, pk):
         try:
-            return conn.objects.get(pk=pk)
+            return connection.objects.get(pk=pk)
         except:
             return Response({
                 'error': 'does not exist'
@@ -44,21 +44,21 @@ class ListConnectionsAPIView(ListAPIView):
                 return Response([serializer.data])
 
         else:
-                reg = conn.objects.all()
+                reg = connection.objects.all()
                 serializer = ConnectionsSerializer(reg, many=True)
                 return Response(serializer.data)
 
 class CreateConnectionsAPIView(CreateAPIView):
-    queryset = conn.objects.all()
+    queryset = connection.objects.all()
     serializer_class = ConnectionsSerializer
 
    
 class UpdateConnectionsAPIView(UpdateAPIView):
-    queryset = conn.objects.all()
+    queryset = connection.objects.all()
     serializer_class = ConnectionsSerializer
 
     def put(self, request, pk=None, format=None):
-        conn_to_update = conn.objects.get(pk=pk)
+        conn_to_update = connection.objects.get(pk=pk)
         serializer = ConnectionsSerializer(instance=conn_to_update,data=request.data, partial=True)
 
         serializer.is_valid(raise_exception=True)
@@ -75,11 +75,11 @@ class UpdateConnectionsAPIView(UpdateAPIView):
         return response
 
 class DeleteConnectionsAPIView(DestroyAPIView):
-    queryset = conn.objects.all()
+    queryset = connection.objects.all()
     serializer_class = ConnectionsSerializer
 
     def delete(self, request, pk, format=None):
-        todo_to_delete =  conn.objects.get(pk=pk)
+        todo_to_delete =  connection.objects.get(pk=pk)
 
         todo_to_delete.delete()
 

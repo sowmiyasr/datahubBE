@@ -4,7 +4,7 @@ from django.http.response import Http404
 from urllib import response
 from django.shortcuts import render
 from rest_framework import generics
-from datahub_v3_app.models import con_detail
+from datahub_v3_app.models import connection_detail
 from rest_framework.views import APIView
 from connection_details_api.serializers import connection_details_keypairsserializer
 from rest_framework.response import Response
@@ -16,8 +16,8 @@ from rest_framework.permissions import IsAuthenticated
 class detail(APIView):
     def get_object(self, pk):
             try:
-                return con_detail.objects.get(pk=pk)
-            except con_detail.DoesNotExist:
+                return connection_detail.objects.get(pk=pk)
+            except connection_detail.DoesNotExist:
                 raise Http404
     def get(self, request, pk=None, format=None):
             if pk:
@@ -26,7 +26,7 @@ class detail(APIView):
                 return Response([serializer.data])
 
             else:
-                data = con_detail.objects.all()
+                data = connection_detail.objects.all()
                 serializer = connection_details_keypairsserializer(data, many=True)
 
                 return Response(serializer.data)
@@ -48,7 +48,7 @@ class detail(APIView):
         return response
 
     def put(self, request, pk=None, format=None):
-        conn_to_update = con_detail.objects.get(pk=pk)
+        conn_to_update = connection_detail.objects.get(pk=pk)
         serializer = connection_details_keypairsserializer(instance=conn_to_update,data=request.data, partial=True)
         serializer.is_valid(raise_exception=True)
         serializer.save()
@@ -60,7 +60,7 @@ class detail(APIView):
         return response
 
     def delete(self, request, pk, format=None):
-        conect_to_delete =  con_detail.objects.get(pk=pk)
+        conect_to_delete =  connection_detail.objects.get(pk=pk)
         conect_to_delete.delete()
         return Response({
             'message': 'connect_detail Deleted Successfully'

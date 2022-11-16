@@ -1,11 +1,11 @@
 from rest_framework import serializers
-from datahub_v3_app.models import pipline_details
+from datahub_v3_app.models import pipeline_details
 
 
 class Pipeline_detailserializer(serializers.ModelSerializer):
 
     class Meta:
-        model= pipline_details
+        model= pipeline_details
         fields = '__all__'
         # fields= ['Pipeline_details_id','Pipeline_detail_name','pipeline_dtls_desc','Pipeline_id','db_SQL_id','SQL_extract_name',
         # 'Target_table_name','Source_table_name','start_date','end_date','Pipeline_dtls_status','last_modified_by','last_modified_on','created_on',

@@ -9,7 +9,7 @@ import requests
 from pipeline_framework import tests
 import subprocess
 import datetime
-from datahub_v3_app.models import pipline_api
+from datahub_v3_app.models import pipeline
 from pipeline_api.serializers import pipline_Serializer
 
 class pipe_framework(APIView):
